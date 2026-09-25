@@ -1,6 +1,7 @@
 import type { ExamBank, Question } from '../../src/core/types';
+import { ENGLISH_EXTRA, HUMANITIES_EXTRA, NEW_SUBJECTS, SCIENCE_EXTRA, mathsQuestions, type PracticeSeed } from './expanded';
 
-type Seed = { stem: string; options: string[]; answer: number | number[]; explanation: string; topic: string };
+type Seed = PracticeSeed;
 
 const SUBJECTS: Record<string, Seed[]> = {
   Mathematics: [
@@ -50,7 +51,18 @@ const SUBJECTS: Record<string, Seed[]> = {
   ],
 };
 
-const BOARDS = ['AQA', 'Pearson Edexcel', 'OCR'] as const;
+const ALL_SUBJECTS: Record<string, Seed[]> = {
+  ...SUBJECTS,
+  Mathematics: [...SUBJECTS.Mathematics, ...mathsQuestions()],
+  'English Language': [...SUBJECTS['English Language'], ...ENGLISH_EXTRA],
+  'Combined Science': [...SUBJECTS['Combined Science'], ...SCIENCE_EXTRA],
+  History: [...SUBJECTS.History, ...HUMANITIES_EXTRA.History],
+  Geography: [...SUBJECTS.Geography, ...HUMANITIES_EXTRA.Geography],
+  'Computer Science': [...SUBJECTS['Computer Science'], ...HUMANITIES_EXTRA['Computer Science']],
+  ...NEW_SUBJECTS,
+};
+
+const BOARDS = ['AQA', 'Pearson Edexcel', 'OCR', 'WJEC Eduqas', 'CCEA'] as const;
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 function makeBank(subject: string, board: string, seeds: Seed[]): ExamBank {
@@ -70,11 +82,11 @@ function makeBank(subject: string, board: string, seeds: Seed[]): ExamBank {
     id, code: `GCSE • ${board}`, title: subject, vendor: board,
     description: `Original ${board}-style GCSE ${subject} practice with worked answers.`,
     passingScore: 60, timeLimitMinutes: Math.max(20, questions.length * 2), questionCount: questions.length,
-    source: 'GradeSpark original practice', importedAt: 0,
+    version: '2026.2', source: 'GradeSpark original practice', importedAt: 0,
     sections: topics.map((topic) => ({ id: topic.toLowerCase().replace(/\W+/g, '-'), title: topic })), questions,
   };
 }
 
 export const GCSE_BANKS: ExamBank[] = BOARDS.flatMap((board) =>
-  Object.entries(SUBJECTS).map(([subject, seeds]) => makeBank(subject, board, seeds)),
+  Object.entries(ALL_SUBJECTS).map(([subject, seeds]) => makeBank(subject, board, seeds)),
 );

@@ -10,8 +10,8 @@ import { useLibraryStore } from '../src/store/libraryStore';
 import { Badge, Button, Card, ProgressBar } from '../src/ui/components/common';
 import { fontSize, radius, spacing, useTheme } from '../src/ui/theme';
 
-const ICONS: Record<string, keyof typeof Ionicons.glyphMap> = { Mathematics: 'calculator', 'English Language': 'book', 'Combined Science': 'flask', History: 'time', Geography: 'earth', 'Computer Science': 'code-slash' };
-const COLOURS: Record<string, string> = { Mathematics: '#7C3AED', 'English Language': '#EC4899', 'Combined Science': '#10B981', History: '#F59E0B', Geography: '#06B6D4', 'Computer Science': '#3B82F6' };
+const ICONS: Record<string, keyof typeof Ionicons.glyphMap> = { Mathematics: 'calculator', 'English Language': 'book', 'English Literature': 'library', 'Combined Science': 'flask', Biology: 'leaf', Chemistry: 'beaker', Physics: 'planet', History: 'time', Geography: 'earth', 'Computer Science': 'code-slash' };
+const COLOURS: Record<string, string> = { Mathematics: '#7C3AED', 'English Language': '#EC4899', 'English Literature': '#DB2777', 'Combined Science': '#10B981', Biology: '#16A34A', Chemistry: '#0891B2', Physics: '#4F46E5', History: '#F59E0B', Geography: '#06B6D4', 'Computer Science': '#3B82F6' };
 
 export default function HomeScreen() {
   const theme = useTheme(), insets = useSafeAreaInsets();

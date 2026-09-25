@@ -48,15 +48,11 @@ export const useLibraryStore = create<LibraryState>((set, get) => ({
   seedSamples: async () => {
     try {
       const existing = await listBanks();
-      const installed = new Set(existing.map((b) => b.id));
-      const missing = SAMPLE_BANKS.filter((bank) => !installed.has(bank.id));
-
-      if (missing.length === 0) {
-        if (existing.length !== get().banks.length) set({ banks: existing });
-        return;
-      }
-
-      for (const bank of missing) {
+      // Refresh bundled content only when its version changes. Stable bank and
+      // question ids keep attempt history, notes and mastery attached.
+      const installed = new Map(existing.map((bank) => [bank.id, bank.version]));
+      const updates = SAMPLE_BANKS.filter((bank) => installed.get(bank.id) !== bank.version);
+      for (const bank of updates) {
         await saveBank({ ...bank, importedAt: bank.importedAt ?? Date.now() });
       }
       set({ banks: await listBanks() });

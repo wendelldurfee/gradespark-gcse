@@ -12,4 +12,6 @@ export const REVISION_RESOURCES: RevisionResource[] = [
   { subject: 'All subjects', title: 'AQA past papers and mark schemes', provider: 'AQA', kind: 'Past papers', url: 'https://www.aqa.org.uk/find-past-papers-and-mark-schemes' },
   { subject: 'All subjects', title: 'Pearson Edexcel past papers', provider: 'Pearson', kind: 'Past papers', url: 'https://qualifications.pearson.com/en/support/support-topics/exams/past-papers.html' },
   { subject: 'All subjects', title: 'OCR assessment materials', provider: 'OCR', kind: 'Past papers', url: 'https://www.ocr.org.uk/qualifications/past-paper-finder/' },
+  { subject: 'All subjects', title: 'Eduqas question bank and resources', provider: 'WJEC Eduqas', kind: 'Past papers', url: 'https://www.eduqas.co.uk/ed/home/question-bank/' },
+  { subject: 'All subjects', title: 'CCEA past papers and mark schemes', provider: 'CCEA', kind: 'Past papers', url: 'https://apps.ccea.org.uk/pastpapers/' },
 ];
