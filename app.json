@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "GradeSpark GCSE",
+    "slug": "gradespark-gcse",
+    "version": "1.0.0",
+    "orientation": "default",
+    "scheme": "gradespark",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#6D28D9"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gradespark.gcse",
+      "buildNumber": "1",
+      "infoPlist": {
+        "UIRequiresFullScreen": false,
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.gradespark.gcse",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#6D28D9"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "expo-system-ui",
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": false
+    },
+    "extra": { "router": {} }
+  }
+}

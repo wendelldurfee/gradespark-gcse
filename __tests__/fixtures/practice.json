@@ -1,0 +1,9 @@
+﻿{
+  "id": "arj-regression",
+  "code": "QA-101",
+  "title": "Import and practice regression",
+  "questions": [
+    {"id":"qa-fill","type":"fill","stem":"Type the word alpha.","correct":["alpha"],"explanation":"The requested word is alpha."},
+    {"id":"qa-order","type":"ordering","stem":"Put these letters in reverse alphabetical order.","choices":[{"id":"A","text":"Alpha"},{"id":"B","text":"Beta"},{"id":"C","text":"Charlie"}],"correct":["C","B","A"]}
+  ]
+}
