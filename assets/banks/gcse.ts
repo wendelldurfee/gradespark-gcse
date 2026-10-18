@@ -1,4 +1,5 @@
 import type { ExamBank, Question } from '../../src/core/types';
+import { expandToMinimum } from './curriculumExpansion';
 import { ENGLISH_EXTRA, HUMANITIES_EXTRA, NEW_SUBJECTS, SCIENCE_EXTRA, mathsQuestions, type PracticeSeed } from './expanded';
 
 type Seed = PracticeSeed;
@@ -51,7 +52,7 @@ const SUBJECTS: Record<string, Seed[]> = {
   ],
 };
 
-const ALL_SUBJECTS: Record<string, Seed[]> = {
+const SUBJECT_POOLS: Record<string, Seed[]> = {
   ...SUBJECTS,
   Mathematics: [...SUBJECTS.Mathematics, ...mathsQuestions()],
   'English Language': [...SUBJECTS['English Language'], ...ENGLISH_EXTRA],
@@ -61,6 +62,10 @@ const ALL_SUBJECTS: Record<string, Seed[]> = {
   'Computer Science': [...SUBJECTS['Computer Science'], ...HUMANITIES_EXTRA['Computer Science']],
   ...NEW_SUBJECTS,
 };
+
+const ALL_SUBJECTS: Record<string, Seed[]> = Object.fromEntries(
+  Object.entries(SUBJECT_POOLS).map(([subject, seeds]) => [subject, expandToMinimum(subject, seeds)]),
+);
 
 const BOARDS = ['AQA', 'Pearson Edexcel', 'OCR', 'WJEC Eduqas', 'CCEA'] as const;
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -82,7 +87,7 @@ function makeBank(subject: string, board: string, seeds: Seed[]): ExamBank {
     id, code: `GCSE • ${board}`, title: subject, vendor: board,
     description: `Original ${board}-style GCSE ${subject} practice with worked answers.`,
     passingScore: 60, timeLimitMinutes: Math.max(20, questions.length * 2), questionCount: questions.length,
-    version: '2026.2', source: 'GradeSpark original practice', importedAt: 0,
+    version: '2026.3', source: 'GradeSpark original practice', importedAt: 0,
     sections: topics.map((topic) => ({ id: topic.toLowerCase().replace(/\W+/g, '-'), title: topic })), questions,
   };
 }

@@ -6,12 +6,12 @@ describe('bundled GCSE practice library', () => {
     expect(new Set(GCSE_BANKS.map((bank) => bank.vendor)).size).toBe(5);
     expect(new Set(GCSE_BANKS.map((bank) => bank.title)).size).toBe(10);
     expect(GCSE_BANKS.length).toBe(50);
-    expect(GCSE_BANKS.reduce((total, bank) => total + bank.questions.length, 0)).toBeGreaterThan(600);
+    expect(GCSE_BANKS.reduce((total, bank) => total + bank.questions.length, 0)).toBeGreaterThanOrEqual(2500);
   });
 
   it('provides a valid answer and explanation for every question', () => {
     for (const bank of GCSE_BANKS) {
-      expect(bank.questions.length).toBeGreaterThanOrEqual(6);
+      expect(bank.questions.length).toBeGreaterThanOrEqual(50);
       for (const question of bank.questions) {
         expect(question.correct.length).toBeGreaterThan(0);
         expect(question.explanation?.length).toBeGreaterThan(20);
