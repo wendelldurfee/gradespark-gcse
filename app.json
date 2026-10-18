@@ -48,6 +48,12 @@
     "experiments": {
       "typedRoutes": false
     },
-    "extra": { "router": {} }
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "3d019e0e-b8c3-453f-81cf-c46668ed0c9f"
+      }
+    },
+    "owner": "wendelldurfee"
   }
 }
