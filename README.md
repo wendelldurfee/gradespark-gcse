@@ -4,7 +4,7 @@ GradeSpark is a modern GCSE practice and revision app for iPhone, Android and we
 
 ## Included content
 
-The app ships with at least 2,500 original exam-style question instances across 50 practice sets. Every subject and exam-board combination contains at least 50 answered questions. Subjects include:
+The app ships with at least 3,750 original exam-style question instances across 50 practice sets. Every subject and exam-board combination contains at least 75 answered questions. Subjects include:
 
 - Mathematics
 - English Language
@@ -20,6 +20,8 @@ The app ships with at least 2,500 original exam-style question instances across 
 Each subject is available under AQA, Pearson Edexcel, OCR, WJEC Eduqas and CCEA. Every question includes an answer key and worked explanation. Questions are informed by GCSE assessment objectives and common paper formats, but do not reproduce copyrighted past-paper questions.
 
 The Revision Hub links to official AQA, Pearson, OCR, WJEC Eduqas and CCEA past-paper resources plus BBC Bitesize, Corbettmaths, Maths Genie, Cognito, FreeScienceLessons and Craig'n'Dave.
+
+The November expansion adds 25 distinct questions to each subject bank, keeping the first 50 question IDs stable. The same subject pool is shared across board filters; these are topic practice sets, not replicas of individual board papers. History options and literature texts vary by course, so students should check their own specification. Each new question includes a link to the official curriculum guidance used for its subject. Existing repeat variants remain in the first 50 questions; no new repeat variants were added.
 
 ## Run locally
 

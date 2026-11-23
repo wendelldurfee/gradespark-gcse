@@ -1,4 +1,4 @@
-export type PracticeSeed = { stem: string; options: string[]; answer: number | number[]; explanation: string; topic: string };
+export type PracticeSeed = { stem: string; options: string[]; answer: number | number[]; explanation: string; topic: string; reference?: string };
 
 const choice = (topic: string, stem: string, options: string[], answer: number, explanation: string): PracticeSeed => ({ topic, stem, options, answer, explanation });
 

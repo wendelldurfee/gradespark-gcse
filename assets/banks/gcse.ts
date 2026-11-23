@@ -1,3 +1,4 @@
+import { RESEARCHED_ADDITIONS } from './researchedExpansion';
 import type { ExamBank, Question } from '../../src/core/types';
 import { expandToMinimum } from './curriculumExpansion';
 import { ENGLISH_EXTRA, HUMANITIES_EXTRA, NEW_SUBJECTS, SCIENCE_EXTRA, mathsQuestions, type PracticeSeed } from './expanded';
@@ -64,7 +65,7 @@ const SUBJECT_POOLS: Record<string, Seed[]> = {
 };
 
 const ALL_SUBJECTS: Record<string, Seed[]> = Object.fromEntries(
-  Object.entries(SUBJECT_POOLS).map(([subject, seeds]) => [subject, expandToMinimum(subject, seeds)]),
+  Object.entries(SUBJECT_POOLS).map(([subject, seeds]) => [subject, [...expandToMinimum(subject, seeds), ...RESEARCHED_ADDITIONS[subject]]]),
 );
 
 const BOARDS = ['AQA', 'Pearson Edexcel', 'OCR', 'WJEC Eduqas', 'CCEA'] as const;
@@ -79,7 +80,7 @@ function makeBank(subject: string, board: string, seeds: Seed[]): ExamBank {
       id: `${id}-q${index + 1}`, bankId: id, sectionId: seed.topic.toLowerCase().replace(/\W+/g, '-'),
       number: index + 1, type: answers.length > 1 ? 'multiple' : 'single', stem: seed.stem,
       choices: seed.options.map((text, i) => ({ id: LETTERS[i], text })),
-      correct: answers.map((i) => LETTERS[i]), explanation: seed.explanation,
+      correct: answers.map((i) => LETTERS[i]), explanation: seed.explanation, reference: seed.reference,
       tags: ['GCSE', board, subject, seed.topic], difficulty: index < 2 ? 1 : index < 4 ? 2 : 3,
     };
   });
@@ -87,7 +88,7 @@ function makeBank(subject: string, board: string, seeds: Seed[]): ExamBank {
     id, code: `GCSE • ${board}`, title: subject, vendor: board,
     description: `Original ${board}-style GCSE ${subject} practice with worked answers.`,
     passingScore: 60, timeLimitMinutes: Math.max(20, questions.length * 2), questionCount: questions.length,
-    version: '2026.3', source: 'GradeSpark original practice', importedAt: 0,
+    version: '2026.4', source: 'GradeSpark original practice', importedAt: 0,
     sections: topics.map((topic) => ({ id: topic.toLowerCase().replace(/\W+/g, '-'), title: topic })), questions,
   };
 }
