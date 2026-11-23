@@ -30,7 +30,7 @@ const MODES: { mode: ExamMode; title: string; description: string; icon: keyof t
   },
   {
     mode: 'practice',
-    title: 'Practice',
+    title: 'Practice mission',
     description: 'Untimed, with the answer and explanation after each question.',
     icon: 'school-outline',
   },
@@ -42,8 +42,8 @@ const MODES: { mode: ExamMode; title: string; description: string; icon: keyof t
   },
   {
     mode: 'custom',
-    title: 'Custom',
-    description: 'Choose the domains, question count, timer and scoring.',
+    title: 'Build your own mission',
+    description: 'Choose topics, question count, timer and scoring.',
     icon: 'options-outline',
   },
 ];
@@ -59,12 +59,12 @@ export default function ExamSetupScreen() {
   const theme = useTheme();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
-  const { bankId } = useLocalSearchParams<{ bankId: string }>();
+  const { bankId, quick } = useLocalSearchParams<{ bankId: string; quick?: string }>();
   const startSession = useExamStore((s) => s.start);
 
   const [bank, setBank] = useState<Awaited<ReturnType<typeof getBank>>>(null);
   const [counts, setCounts] = useState({ total: 0, unseen: 0, incorrect: 0, marked: 0 });
-  const [mode, setMode] = useState<ExamMode>('exam');
+  const [mode, setMode] = useState<ExamMode>('practice');
   const [config, setConfig] = useState<SessionConfig | null>(null);
   const [starting, setStarting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -80,7 +80,13 @@ export default function ExamSetupScreen() {
           return;
         }
         setBank(loaded);
-        setConfig(configForMode(loaded, 'exam', randomSeed()));
+        const initial = configForMode(loaded, 'practice', randomSeed());
+        if (quick === 'true') {
+          initial.questionCount = Math.min(5, loaded.questions.length);
+          const algebra = loaded.sections?.find(section => section.id === 'algebra');
+          if (algebra) initial.sectionIds = [algebra.id];
+        }
+        setConfig(initial);
         setCounts(await countByFilter(bankId));
         navigation.setOptions({ title: loaded.code });
       } catch (err) {
@@ -90,7 +96,7 @@ export default function ExamSetupScreen() {
     return () => {
       cancelled = true;
     };
-  }, [bankId, navigation]);
+  }, [bankId, quick, navigation]);
 
   const chooseMode = (next: ExamMode) => {
     if (!bank) return;
@@ -142,6 +148,7 @@ export default function ExamSetupScreen() {
     <ScrollView
       contentContainerStyle={{
         padding: spacing.lg,
+        width: '100%', maxWidth: 1000, alignSelf: 'center',
         paddingBottom: insets.bottom + spacing.xxl,
         gap: spacing.lg,
       }}
@@ -154,8 +161,7 @@ export default function ExamSetupScreen() {
           {bank.title}
         </Text>
         <Text style={{ color: theme.textMuted, fontSize: fontSize.sm, lineHeight: 20 }}>
-          {bank.questions.length} questions · pass mark {bank.passingScore}% ·{' '}
-          {bank.timeLimitMinutes} minutes
+          {bank.questions.length} questions to explore · Choose a way to practise below
         </Text>
         {bank.source && (
           <Text style={{ color: theme.textFaint, fontSize: fontSize.xs }}>
@@ -254,7 +260,7 @@ export default function ExamSetupScreen() {
               {(bank.sections?.length ?? 0) > 0 && (
                 <View style={{ gap: spacing.sm }}>
                   <Text style={{ color: theme.textMuted, fontSize: fontSize.sm }}>
-                    Domains {config.sectionIds.length === 0 ? '(all)' : `(${config.sectionIds.length} selected)`}
+                    Topics {config.sectionIds.length === 0 ? '(all)' : `(${config.sectionIds.length} selected)`}
                   </Text>
                   <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm }}>
                     {bank.sections!.map((section) => {
@@ -363,7 +369,7 @@ export default function ExamSetupScreen() {
         </View>
 
         <Button
-          label={starting ? 'Starting…' : 'Start exam'}
+          label={starting ? 'Starting…' : (mode === 'exam' ? 'Start exam' : 'Start mission')}
           icon="play"
           loading={starting}
           disabled={poolSize === 0}

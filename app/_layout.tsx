@@ -97,8 +97,8 @@ export default function RootLayout() {
           <Stack.Screen name="import" options={{ title: 'Add Practice Set' }} />
           <Stack.Screen name="resources" options={{ title: 'Revision Hub' }} />
           <Stack.Screen name="settings" options={{ title: 'Settings' }} />
-          <Stack.Screen name="stats" options={{ title: 'Study Statistics' }} />
-          <Stack.Screen name="exam/[bankId]" options={{ title: 'Choose Practice Mode' }} />
+          <Stack.Screen name="stats" options={{ title: 'My skills' }} />
+          <Stack.Screen name="exam/[bankId]" options={{ title: 'Choose your mission' }} />
           {/* The runner owns its own chrome and must not be swiped away mid-exam. */}
           <Stack.Screen
             name="session/[sessionId]"

@@ -67,6 +67,7 @@ export default function StatsScreen() {
     <ScrollView
       contentContainerStyle={{
         padding: spacing.lg,
+        width: '100%', maxWidth: 1000, alignSelf: 'center',
         paddingBottom: insets.bottom + spacing.xxl,
         gap: spacing.lg,
       }}

@@ -1,8 +1,8 @@
-import { Platform, useColorScheme } from 'react-native';
+import { Platform } from 'react-native';
 
 /**
- * GradeSpark uses energetic violet with bright subject accents and keeps
- * contrast high in both system colour schemes.
+ * GradeSpark Quest uses a consistent navy and lime palette and keeps
+ * contrast high across phones and tablets.
  */
 
 export interface Theme {
@@ -28,17 +28,17 @@ export interface Theme {
 
 const dark: Theme = {
   dark: true,
-  bg: '#100D1D',
-  surface: '#1C172D',
-  surfaceAlt: '#29213F',
-  border: '#3D3358',
-  text: '#FAF8FF',
-  textMuted: '#B7AEC9',
-  textFaint: '#817794',
-  primary: '#8B5CF6',
-  primaryText: '#FFFFFF',
+  bg: '#141C2C',
+  surface: '#1D2940',
+  surfaceAlt: '#243048',
+  border: '#3D4D65',
+  text: '#F4F7FC',
+  textMuted: '#B1BED4',
+  textFaint: '#9BAAC2',
+  primary: '#B5F36A',
+  primaryText: '#18261A',
   success: '#34D399',
-  successBg: '#0F3A2E',
+  successBg: '#293E2B',
   danger: '#F87171',
   dangerBg: '#3F1A1D',
   warning: '#FBBF24',
@@ -47,29 +47,8 @@ const dark: Theme = {
   markBg: '#3A2E10',
 };
 
-const light: Theme = {
-  dark: false,
-  bg: '#F7F5FC',
-  surface: '#FFFFFF',
-  surfaceAlt: '#EEE9FA',
-  border: '#DED7EB',
-  text: '#211A31',
-  textMuted: '#655C76',
-  textFaint: '#91879F',
-  primary: '#6D28D9',
-  primaryText: '#FFFFFF',
-  success: '#047857',
-  successBg: '#D5F5E6',
-  danger: '#B91C1C',
-  dangerBg: '#FDE2E2',
-  warning: '#B45309',
-  warningBg: '#FDF0D5',
-  info: '#1D4ED8',
-  markBg: '#FDF0D5',
-};
-
 export function useTheme(): Theme {
-  return useColorScheme() === 'light' ? light : dark;
+  return dark;
 }
 
 export const spacing = {

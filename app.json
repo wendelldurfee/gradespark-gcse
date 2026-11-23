@@ -5,11 +5,11 @@
     "version": "1.0.0",
     "orientation": "default",
     "scheme": "gradespark",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
       "resizeMode": "contain",
-      "backgroundColor": "#6D28D9"
+      "backgroundColor": "#141C2C"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -27,7 +27,7 @@
       "package": "com.gradespark.gcse",
       "versionCode": 1,
       "adaptiveIcon": {
-        "backgroundColor": "#6D28D9"
+        "backgroundColor": "#141C2C"
       }
     },
     "web": {
